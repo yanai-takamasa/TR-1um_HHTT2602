@@ -1,0 +1,272 @@
+** sch_path: /home/ishi-kai/xx_test/TEMAKI/12_LVS/HHTT2602.sch
+.subckt HHTT2602 P1 P2 P3 P4 P5 P6 P7 VSS P9 P10 P11 P12 P13 P14 P15 VDD
+*.PININFO P1:B P2:B P3:B P4:B P5:B P6:B P7:B VSS:B P9:B P10:B P11:B P12:B P13:B P14:B P15:B VDD:B
+xframe P1 VDD P2 P15 P14 P3 P4 P13 P5 P12 P6 P11 P10 P7 P9 VSS OSS_FRAME
+xTSD VSS TSD_IBS TSD_OUT VDD TSD_VTH TSD_VTL TSD_TDI TSD_TCM TSD_MON TSD_EN TSD
+xAMP VDD AMP_OUT AMP_VP AMP_VN AMP_NB VSS amp1
+xESDR_I1 AMP_VP P4 ESD_R2K
+xESDR_O1 P1 AMP_OUT ESD_R200
+xESDR_I2 AMP_VN P3 ESD_R2K
+xESDR_I3 AMP_NB P2 ESD_R2K
+xESDR_I4 TSD_VTH P13 ESD_R2K
+xESDR_I5 TSD_VTL P14 ESD_R2K
+xESDR_I6 TSD_IBS P10 ESD_R2K
+xESDR_I7 TSD_EN P9 ESD_R2K
+xESDR_I8 TSD_TDI P11 ESD_R2K
+xESDR_I9 TSD_TCM P7 ESD_R2K
+xESDR_O2 P15 TSD_OUT ESD_R200
+xESDR_O3 P12 TSD_MON ESD_R200
+DD1 DIO_A DIO_C DP A=12.96p P=14.4u m=1
+xESDR_O4 DIO_A P5 ESD_R200
+xESDR_O5 P6 DIO_C ESD_R200
+.ends
+
+* expanding   symbol:  OSS_FRAME.sym # of pins=16
+** sym_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_FRAME.sym
+** sch_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_FRAME.sch
+.subckt OSS_FRAME P1 VDD P2 P15 P14 P3 P4 P13 P5 P12 P6 P11 P10 P7 P9 VSS
+*.PININFO P1:B P2:B P3:B P4:B P5:B P6:B P7:B VSS:B VDD:B P15:B P14:B P13:B P12:B P11:B P10:B P9:B
+x1 VDD P1 VSS OSS_ESD_5V_ANA
+x2 VDD VSS OSS_ESD_5V_VDD
+x3 VDD VSS OSS_ESD_5V_VSS
+x4 VDD P2 VSS OSS_ESD_5V_ANA
+x5 VDD P3 VSS OSS_ESD_5V_ANA
+x6 VDD P4 VSS OSS_ESD_5V_ANA
+x7 VDD P5 VSS OSS_ESD_5V_ANA
+x8 VDD P6 VSS OSS_ESD_5V_ANA
+x9 VDD P7 VSS OSS_ESD_5V_ANA
+x10 VDD P15 VSS OSS_ESD_5V_ANA
+x11 VDD P14 VSS OSS_ESD_5V_ANA
+x12 VDD P13 VSS OSS_ESD_5V_ANA
+x13 VDD P12 VSS OSS_ESD_5V_ANA
+x14 VDD P11 VSS OSS_ESD_5V_ANA
+x15 VDD P10 VSS OSS_ESD_5V_ANA
+x16 VDD P9 VSS OSS_ESD_5V_ANA
+.ends
+
+
+* expanding   symbol:  TSD.sym # of pins=11
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/TSD.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/TSD.sch
+.subckt TSD VSS IBIAS TSDOUT VDD VTH VTL T_DIO T_CMP MONOUT EN
+*.PININFO TSDOUT:O VSS:B VDD:B IBIAS:I VTH:I VTL:I EN:I MONOUT:B T_DIO:I T_CMP:I
+xCMP VDD VSS ENI VT_TMP CMPIP IBCMP CMPOUT TSD_COMP
+DD1 VS_TMP net1 DP A=12.96p P=14.4u m=1
+DD2 net1 VSS DP A=12.96p P=14.4u m=1
+MXM24 VPB VPB VDD VDD PMOS w=10u l=8u m=1
+MXM25 VS_TMP VPB VDD VDD PMOS w=10u l=8u m=6
+MXM7 IBIAS IBIAS VSS VSS NMOS w=6u l=4u m=1
+MXM8 VPB IBIAS VSS VSS NMOS w=6u l=4u m=1
+MXM1 IBCMP VPB VDD VDD PMOS w=10u l=8u m=1
+x1 VDD EN XEN VSS TSD_INV1
+xASW1 VDD VTH VT_TMP XCMPO VSS TSD_ASW1
+xASW2 VDD VTL VT_TMP CMPO VSS TSD_ASW1
+MXM4 IBIAS XEN VSS VSS NMOS w=6u l=2u m=1
+x2 VDD XEN ENI VSS TSD_INV1
+MXM23 VPB ENI VDD VDD PMOS w=10u l=2u m=1
+x3 VDD CMPOUT XCMPO VSS TSD_INV1
+x4 VDD XCMPO CMPO VSS TSD_INV1
+MXM2 VS_TMP XEN VSS VSS NMOS w=6u l=2u m=1
+MXMDMY1 VDD VDD VDD VDD PMOS w=10u l=8u m=2
+MXMDMY2 VSS VSS VSS VSS NMOS w=6u l=4u m=2
+MXM27 XXTSDOUT CMPOUT VDD VDD PMOS w=10u l=2u m=4
+MXM16 XXTSDOUT CMPOUT VSS VSS NMOS w=6u l=2u m=2
+xASW3 VDD VS_TMP CMPIP XT_CMP VSS TSD_ASW1
+xASW4 VDD VS_TMP MONOUT T_DIOI VSS TSD_ASW1
+xASW5 VDD CMPIP MONOUT T_CMPI VSS TSD_ASW1
+x5 VDD T_DIO XT_DIO VSS TSD_INV1
+x6 VDD XT_DIO T_DIOI VSS TSD_INV1
+x7 VDD T_CMP XT_CMP VSS TSD_INV1
+x8 VDD XT_CMP T_CMPI VSS TSD_INV1
+x1[7] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[6] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[5] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[4] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[3] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[2] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[1] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x1[0] VDD XXTSDOUT XTSDOUT VSS TSD_INV1
+x2[23] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[22] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[21] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[20] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[19] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[18] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[17] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[16] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[15] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[14] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[13] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[12] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[11] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[10] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[9] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[8] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[7] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[6] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[5] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[4] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[3] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[2] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[1] VDD XTSDOUT TSDOUT VSS TSD_INV1
+x2[0] VDD XTSDOUT TSDOUT VSS TSD_INV1
+DD3 VSS EN DN A=12.96p P=14.4u m=1
+DD4 VSS T_DIO DN A=12.96p P=14.4u m=1
+DD5 VSS T_CMP DN A=12.96p P=14.4u m=1
+DD6 VSS ENI DN A=12.96p P=14.4u m=1
+DD7 VSS CMPOUT DN A=12.96p P=14.4u m=1
+DD8 VSS XCMPO DN A=12.96p P=14.4u m=1
+.ends
+
+
+* expanding   symbol:  amp1.sym # of pins=6
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/amp1.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/amp1.sch
+.subckt amp1 vdd out vp vn nbias vss
+*.PININFO vss:B nbias:I vn:I vp:I out:O vdd:B
+MXM_CS ntail nbias vss vss NMOS w=5u l=5u m=1
+MXM_OUTN out nbias vss vss NMOS w=5u l=5u m=10
+MXM_DIFN pcm vn ntail vss NMOS w=5u l=5u m=4
+MXM_CSDMY vss vss vss vss NMOS w=5u l=5u m=6
+MXM_DIFDMY vss vss vss vss NMOS w=5u l=5u m=2
+MXM_BIAS nbias nbias vss vss NMOS w=5u l=5u m=1
+MXM_DIFP pg vp ntail vss NMOS w=5u l=5u m=4
+MXM_CM1 pg pcm vdd vdd PMOS w=4u l=10u m=1
+MXM_OUTP out pg vdd vdd PMOS w=5u l=2u m=10
+MXM_CMDMY vdd vdd vdd vdd PMOS w=4u l=10u m=2
+MXM_CM0 pcm pcm vdd vdd PMOS w=4u l=10u m=1
+MXM_DIFDMY1 vss vss vss vss NMOS w=5u l=5u m=2
+XXC1 net_cc out vss F_CSIO x=59.8u y=59.8u A=3.576n P=239.2u m=2
+DD1 vss net_cc DN A=12.96p P=14.4u m=1
+xRES1 net_cc pg amp1_res
+DD3 vss vn DN A=12.96p P=14.4u m=1
+DD2 vss vp DN A=12.96p P=14.4u m=1
+.ends
+
+
+* expanding   symbol:  ESD_R2K.sym # of pins=2
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/ESD_R2K.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/ESD_R2K.sch
+.subckt ESD_R2K N P
+*.PININFO P:B N:B
+XR1 P net1 F_RS w=12e-6 l=61.4e-6 m=1
+XR2 net1 net2 F_RS w=12e-6 l=61.4e-6 m=1
+XR3 net2 net3 F_RS w=12e-6 l=61.4e-6 m=1
+XR4 net3 N F_RS w=12e-6 l=61.4e-6 m=1
+.ends
+
+
+* expanding   symbol:  ESD_R200.sym # of pins=2
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/ESD_R200.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/ESD_R200.sch
+.subckt ESD_R200 N P
+*.PININFO P:B N:B
+XR1 P N F_RS w=12e-6 l=22.3e-6 m=1
+.ends
+
+
+* expanding   symbol:  OSS_ESD_5V_ANA.sym # of pins=4
+** sym_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_ANA.sym
+** sch_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_ANA.sch
+.subckt OSS_ESD_5V_ANA VDD PAD VSS
+*.PININFO PAD:B VDD:B VSS:B
+MXM1 PAD VDD VDD VDD PMOS w=500u l=2u m=1
+MXM2 PAD VSS VSS VSS NMOSE w=500u l=2u m=1
+.ends
+
+
+* expanding   symbol:  OSS_ESD_5V_VDD.sym # of pins=3
+** sym_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_VDD.sym
+** sch_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_VDD.sch
+.subckt OSS_ESD_5V_VDD VDD VSS
+*.PININFO VSS:B VDD:B VDD:B
+MXM5 VSS VDD VDD VDD PMOS w=500u l=2u m=1
+MXM6 VDD VSS VSS VSS NMOSE w=500u l=2u m=1
+.ends
+
+
+* expanding   symbol:  OSS_ESD_5V_VSS.sym # of pins=3
+** sym_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_VSS.sym
+** sch_path: /home/ishi-kai/pdk/TR-1um/libs.tech/xschem/TR-1um_frame/OSS_ESD_5V_VSS.sch
+.subckt OSS_ESD_5V_VSS VDD VSS
+*.PININFO VSS:B VDD:B VSS:B
+MXM3 VSS VDD VDD VDD PMOS w=500u l=2u m=1
+MXM4 VDD VSS VSS VSS NMOSE w=500u l=2u m=1
+.ends
+
+
+* expanding   symbol:  TSD_COMP.sym # of pins=7
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/TSD_COMP.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/TSD_COMP.sch
+.subckt TSD_COMP VDD VSS EN INN INP IBIAS OUT
+*.PININFO VSS:B EN:I VDD:B INN:I INP:I IBIAS:I OUT:O
+MXM1 XEN EN VSS VSS NMOS w=6u l=2u m=1
+MXM3 ENI XEN VSS VSS NMOS w=6u l=2u m=1
+MXM7dmy VSS VSS VSS VSS NMOS w=6u l=4u m=2
+MXM7 IBIAS IBIAS VSS VSS NMOS w=6u l=4u m=1
+MXM9 DFN DFN VSS VSS NMOS w=6u l=2u m=1
+MXM10 VSS VSS VSS VSS NMOS w=6u l=2u m=1
+MXM15 AMPOUT XEN VSS VSS NMOS w=6u l=2u m=1
+MXM17 OUT XOUT VSS VSS NMOS w=6u l=2u m=3
+MXM18 DFN INN TAIL TAIL PMOS w=20u l=2u m=4
+MXM19 DFP INP TAIL TAIL PMOS w=20u l=2u m=4
+MXM20 TAIL TAIL TAIL TAIL PMOS w=20u l=2u m=2
+MXM22 ENI XEN VDD VDD PMOS w=10u l=2u m=2
+MXM23 VPB ENI VDD VDD PMOS w=10u l=2u m=1
+MXM24dmy VDD VDD VDD VDD PMOS w=10u l=8u m=3
+MXM24 VPB VPB VDD VDD PMOS w=10u l=8u m=1
+MXM25 TAIL VPB VDD VDD PMOS w=10u l=8u m=6
+MXM27 XOUT AMPOUT VDD VDD PMOS w=10u l=8u m=1
+MXM28 OUT XOUT VDD VDD PMOS w=10u l=8u m=3
+MXM4 IBIAS XEN VSS VSS NMOS w=6u l=2u m=1
+MXM5 DFP XEN VSS VSS NMOS w=6u l=2u m=1
+MXM6 DFN XEN VSS VSS NMOS w=6u l=2u m=1
+MXM8 VPB IBIAS VSS VSS NMOS w=6u l=4u m=1
+MXM12 DFP DFN VSS VSS NMOS w=6u l=2u m=1
+MXM13 AMPOUT DFP VSS VSS NMOS w=6u l=2u m=1
+MXM16 XOUT AMPOUT VSS VSS NMOS w=6u l=2u m=1
+MXM2 AMPOUT VPB VDD VDD PMOS w=10u l=8u m=3
+MXM21 XEN EN VDD VDD PMOS w=10u l=2u m=2
+MXM30 TAIL TAIL TAIL TAIL PMOS w=20u l=2u m=2
+.ends
+
+
+* expanding   symbol:  TSD_INV1.sym # of pins=4
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/TSD_INV1.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/TSD_INV1.sch
+.subckt TSD_INV1 VDD A Y VSS
+*.PININFO A:I Y:O VSS:B VDD:B
+MXM2 Y A VDD VDD PMOS w=10u l=2u m=2
+MXM1 Y A VSS VSS NMOS w=6u l=2u m=1
+.ends
+
+
+* expanding   symbol:  TSD_ASW1.sym # of pins=5
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/TSD_ASW1.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/TSD_ASW1.sch
+.subckt TSD_ASW1 VDD A B EN VSS
+*.PININFO A:I B:O VSS:B VDD:B EN:I
+MXM2 B XEN A VDD PMOS w=10u l=2u m=2
+MXM1 B ENI A VSS NMOS w=6u l=2u m=1
+x1 VDD EN XEN VSS TSD_INV1
+x2 VDD XEN ENI VSS TSD_INV1
+.ends
+
+
+* expanding   symbol:  amp1_res.sym # of pins=2
+** sym_path: /home/ishi-kai/TEMAKI_E1P0/amp1_res.sym
+** sch_path: /home/ishi-kai/TEMAKI_E1P0/amp1_res.sch
+.subckt amp1_res N P
+*.PININFO P:B N:B
+XR1 P net1 F_RS w=6e-6 l=59e-6 m=1
+XR2 net1 net2 F_RS w=6e-6 l=59e-6 m=1
+XR3 net2 net3 F_RS w=6e-6 l=59e-6 m=1
+XR4 net3 net4 F_RS w=6e-6 l=59e-6 m=1
+XR5 net4 net5 F_RS w=6e-6 l=59e-6 m=1
+XR6 net5 net6 F_RS w=6e-6 l=59e-6 m=1
+XR7 net6 net7 F_RS w=6e-6 l=59e-6 m=1
+XR8 net7 net8 F_RS w=6e-6 l=59e-6 m=1
+XR9 net8 net9 F_RS w=6e-6 l=59e-6 m=1
+XR10 net9 N F_RS w=6e-6 l=59e-6 m=1
+.ends
+
